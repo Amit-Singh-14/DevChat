@@ -56,7 +56,7 @@ function MyChats({ fetchChatAgain }) {
       <Box
         pb={3}
         px={3}
-        fontSize={{ base: "28px", md: "30px" }}
+        fontSize={{ base: "28px", md: "25px" }}
         fontFamily="Work sans"
         display="flex"
         w="100%"

@@ -51,14 +51,17 @@ io.on("connection", (socket) => {
   console.log("connected to socket");
   socket.on("setup", (userdata) => {
     socket.join(userdata._id);
-    // console.log(userdata._id);
     socket.emit("connected");
   });
 
   socket.on("join-chat", (room) => {
     socket.join(room);
     console.log("user joinded room:", room);
+    // console.log(socket);
   });
+
+  socket.on("typing", (room) => socket.in(room).emit("typing"));
+  socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
   socket.on("new-message", (newMessageRecieved) => {
     var chat = newMessageRecieved.chat;

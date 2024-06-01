@@ -16,7 +16,7 @@ Welcome to the Real-Time Chat Application project! This application allows devel
 - [x] User authentication and authorization
 - [x] Private and group chats
 - [x] Message history and persistence
-- [ ] Typing indicators
+- [x] Typing indicators
 - [ ] Online/offline status indicators
 
 ## Upcoming Features
@@ -24,7 +24,7 @@ Welcome to the Real-Time Chat Application project! This application allows devel
 - [ ] File sharing
 - [ ] Video and voice calls
 - [ ] Screen Sharing
-- [ ] Enhanced notification system
+- [x] Enhanced notification system
 - [ ] Additionl features will be added
 
 ## Installation

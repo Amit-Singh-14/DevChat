@@ -6,6 +6,7 @@ const ChatProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [selectedChat, setSelectedChat] = useState();
   const [chats, setChats] = useState([]);
+  const [notification, setNotification] = useState([]);
 
   // useNavigation must be used inside a router then only it will work
   const navigate = useNavigate();
@@ -20,7 +21,18 @@ const ChatProvider = ({ children }) => {
   }, [navigate]);
 
   return (
-    <chatContext.Provider value={{ user, setUser, selectedChat, setSelectedChat, chats, setChats }}>
+    <chatContext.Provider
+      value={{
+        user,
+        setUser,
+        selectedChat,
+        setSelectedChat,
+        chats,
+        setChats,
+        notification,
+        setNotification,
+      }}
+    >
       {children}
     </chatContext.Provider>
   );

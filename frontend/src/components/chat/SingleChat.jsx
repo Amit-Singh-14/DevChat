@@ -8,20 +8,28 @@ import UpdateGroupChatModal from "../utils-compoents/UpdateGroupChatModel";
 import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
 import axios from "axios";
-
-// bug  (fixed) -> in create group after creating the selectuser are not reseting
-
-// bug -> diffrent user chat list have sender name only
+import Lottie from "react-lottie";
+import animationData from "../../animation/typing.json";
 
 const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 function SingleChat({ fetchChatAgain, setFetchChatAgain }) {
-  const { user, selectedChat, setSelectedChat } = ChatState();
+  const { user, selectedChat, setSelectedChat, notification, setNotification } = ChatState();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
+  const [typing, setTyping] = useState(false);
+  const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
 
   const fetchMessages = async () => {
@@ -91,12 +99,33 @@ function SingleChat({ fetchChatAgain, setFetchChatAgain }) {
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
+
+    if (!socketConnected) return;
+
+    if (!typing) {
+      setTyping(true);
+      socket.emit("typing", selectedChat._id);
+    }
+
+    let lastTypingTime = new Date().getTime();
+    var timerLength = 3000;
+
+    setTimeout(() => {
+      var timeNow = new Date().getTime();
+      var timediff = timeNow - lastTypingTime;
+      if (timediff >= timerLength && typing) {
+        socket.emit("stop typing", selectedChat._id);
+        setTyping(false);
+      }
+    }, timerLength);
   };
 
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("setup", user.finduser);
-    socket.on("connection", () => setSocketConnected(true));
+    socket.on("connected", () => setSocketConnected(true));
+    socket.on("typing", () => setIsTyping(true));
+    socket.on("stop typing", () => setIsTyping(false));
   }, []);
 
   useEffect(() => {
@@ -108,6 +137,11 @@ function SingleChat({ fetchChatAgain, setFetchChatAgain }) {
     socket.on("message-recieved", (newMessageRecived) => {
       if (!selectedChatCompare || selectedChatCompare._id !== newMessageRecived.chat._id) {
         // give notifcation
+        console.log(notification);
+        if (!notification.includes(newMessageRecived)) {
+          setNotification([newMessageRecived, ...notification]);
+          setFetchChatAgain(!fetchChatAgain);
+        }
       } else {
         setMessages([...messages, newMessageRecived]);
       }
@@ -135,8 +169,8 @@ function SingleChat({ fetchChatAgain, setFetchChatAgain }) {
             />
             {!selectedChat.isGroupChat ? (
               <>
-                {getSender(user, selectedChat.users)}
-                <ProfileModel user={getSenderFull(user, selectedChat.users)} />
+                {getSender(user.finduser, selectedChat.users)}
+                <ProfileModel user={getSenderFull(user.finduser, selectedChat.users)} />
               </>
             ) : (
               <>
@@ -168,6 +202,16 @@ function SingleChat({ fetchChatAgain, setFetchChatAgain }) {
               </div>
             )}
             <FormControl onKeyDown={sendMessage} id="first-name" isRequired mt={3}>
+              {istyping && (
+                <div>
+                  <Lottie
+                    options={defaultOptions}
+                    // height={50}
+                    width={70}
+                    style={{ marginBottom: 15, marginLeft: 0 }}
+                  />
+                </div>
+              )}
               <Input
                 variant="filled"
                 bg="#E0E0E0"
