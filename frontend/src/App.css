@@ -3,7 +3,7 @@
 .App {
   min-height: 100vh;
   display: flex;
-  background-image: url(background.png);
+  background-image: url(background1.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -20,9 +20,24 @@
   background-color: #555;
 }
 
+/* .container {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+} */
+
 .messages {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   scrollbar-width: none;
+}
+.loginsignup {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }

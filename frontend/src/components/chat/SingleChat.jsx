@@ -159,6 +159,7 @@ function SingleChat({ fetchChatAgain, setFetchChatAgain }) {
             w="100%"
             fontFamily="Work sans"
             display="flex"
+            color={"white"}
             justifyContent={{ base: "space-between" }}
             alignItems="center"
           >
@@ -187,11 +188,12 @@ function SingleChat({ fetchChatAgain, setFetchChatAgain }) {
             display="flex"
             flexDir="column"
             justifyContent="flex-end"
+            className="loginsignup"
             p={3}
-            bg="#E8E8E8"
+            // bg="#E8E8E8"
             w="100%"
             h="100%"
-            borderRadius="lg"
+            // borderRadius="lg"
             overflowY="hidden"
           >
             {loading ? (

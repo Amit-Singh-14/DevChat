@@ -148,13 +148,18 @@ const Signup = () => {
     <VStack spacing="5px">
       <FormControl id="first-name" isRequired>
         <FormLabel>Name</FormLabel>
-        <Input placeholder="Enter Your Name" onChange={(e) => setName(e.target.value)} />
+        <Input
+          placeholder="Enter Your Name"
+          _placeholder={{ opacity: 7, color: "white" }}
+          onChange={(e) => setName(e.target.value)}
+        />
       </FormControl>
       <FormControl id="email" isRequired>
         <FormLabel>Email Address</FormLabel>
         <Input
           type="email"
           placeholder="Enter Your Email Address"
+          _placeholder={{ opacity: 7, color: "white" }}
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
@@ -164,6 +169,7 @@ const Signup = () => {
           <Input
             type={show ? "text" : "password"}
             placeholder="Enter Password"
+            _placeholder={{ opacity: 7, color: "white" }}
             onChange={(e) => setPassword(e.target.value)}
           />
           <InputRightElement width="4.5rem">
@@ -179,6 +185,7 @@ const Signup = () => {
           <Input
             type={show ? "text" : "password"}
             placeholder="Confirm password"
+            _placeholder={{ opacity: 7, color: "white" }}
             onChange={(e) => setConfirmpassword(e.target.value)}
           />
           <InputRightElement width="4.5rem">
@@ -194,12 +201,15 @@ const Signup = () => {
           type="file"
           p={1.5}
           accept="image/*"
+          cursor={"pointer"}
           onChange={(e) => postDetails(e.target.files[0])}
         />
       </FormControl>
       <Button
-        colorScheme="blue"
+        background={"#002650"}
         width="100%"
+        color={"white"}
+        _hover={{ backgroundColor: "#111485" }}
         style={{ marginTop: 15 }}
         onClick={submitHandler}
         isLoading={picLoading}

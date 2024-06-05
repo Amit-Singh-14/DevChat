@@ -44,14 +44,16 @@ function MyChats({ fetchChatAgain }) {
   // console.log(loggedUser);
   return (
     <Box
+      className="loginsignup"
+      color={"white"}
       display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
       flexDir="column"
       alignItems="center"
       p={3}
-      bg="white"
+      // bg="white"
       w={{ base: "100%", md: "31%" }}
-      borderRadius="lg"
-      borderWidth="1px"
+      // borderRadius="lg"
+      // borderWidth="1px"
     >
       <Box
         pb={3}
@@ -78,7 +80,7 @@ function MyChats({ fetchChatAgain }) {
         display="flex"
         flexDir="column"
         p={3}
-        bg="#F8F8F8"
+        // bg="#F8F8F8"
         w="100%"
         h="100%"
         borderRadius="lg"

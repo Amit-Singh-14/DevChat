@@ -118,16 +118,23 @@ function SideDrawer() {
   return (
     <>
       <Box
+        className="loginsignup"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        bg="white"
+        // bg="white"
+        color={"white"}
         w="100%"
         p="5px 10px 5px 10px"
-        borderWidth="5px"
+        // borderWidth="5px"
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
-          <Button variant="ghost" onClick={onOpen}>
+          <Button
+            variant="ghost"
+            onClick={onOpen}
+            color={"white"}
+            _hover={{ color: "black", bg: "white" }}
+          >
             <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
             <Text display={{ base: "none", md: "flex" }} px="4">
               Search Users

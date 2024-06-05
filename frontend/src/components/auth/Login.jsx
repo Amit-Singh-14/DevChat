@@ -76,7 +76,10 @@ function Login() {
         <Input
           value={email}
           type="email"
+          id="input"
+          color={"white"}
           placeholder="Enter Your Email Address"
+          _placeholder={{ opacity: 7, color: "white" }}
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
@@ -88,6 +91,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             type={show ? "text" : "password"}
             placeholder="Enter password"
+            _placeholder={{ opacity: 7, color: "white" }}
           />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -97,8 +101,10 @@ function Login() {
         </InputGroup>
       </FormControl>
       <Button
-        colorScheme="blue"
+        color="white"
+        background={"#002650"}
         width="100%"
+        _hover={{ backgroundColor: "#111485" }}
         style={{ marginTop: 15 }}
         onClick={submitHandler}
         isLoading={loading}
@@ -107,8 +113,10 @@ function Login() {
       </Button>
       <Button
         variant="solid"
-        colorScheme="red"
+        color={"white"}
+        background="#5b1a7e"
         width="100%"
+        _hover={{ background: "#37013a" }}
         onClick={() => {
           setEmail("guest@example.com");
           setPassword("123456");
