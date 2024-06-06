@@ -10,7 +10,6 @@ import GroupChatModel from "../utils-compoents/GroupChatModel";
 function MyChats({ fetchChatAgain }) {
   const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
-
   const toast = useToast();
 
   const fetchChats = async () => {
@@ -22,7 +21,7 @@ function MyChats({ fetchChatAgain }) {
       };
 
       const { data } = await axios.get("/api/v1/chat", config);
-      // console.log(data);
+      console.log(data);
       setChats(data);
     } catch (error) {
       console.log(error);
@@ -41,7 +40,6 @@ function MyChats({ fetchChatAgain }) {
     fetchChats();
   }, [fetchChatAgain]);
 
-  // console.log(loggedUser);
   return (
     <Box
       className="loginsignup"

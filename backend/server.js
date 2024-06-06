@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import connectDB from "./config/dbConnect.js";
 import { chats } from "./data/data.js";
+import path from "path";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 
 // env config
@@ -31,6 +32,23 @@ app.use("/api/v1/chat", chatRouter);
 import messageRouter from "./routes/message.route.js";
 app.use("/api/v1/message", messageRouter);
 
+// --------------------------deployment------------------------------
+
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "dist", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+
+// --------------------------deployment------------------------------
 //error middleware
 app.use(notFound);
 app.use(errorHandler);
