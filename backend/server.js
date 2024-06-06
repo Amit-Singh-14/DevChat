@@ -3,6 +3,7 @@ import { config } from "dotenv";
 import connectDB from "./config/dbConnect.js";
 import { chats } from "./data/data.js";
 import path from "path";
+import cors from "cors";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 
 // env config
@@ -11,7 +12,11 @@ config();
 // db conncection
 await connectDB();
 
+let corsOptions = {
+  origin: ["http://localhost:5000", "https://devchat-8hye.onrender.com"],
+};
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
