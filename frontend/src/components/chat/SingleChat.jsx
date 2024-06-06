@@ -11,7 +11,8 @@ import axios from "axios";
 import Lottie from "react-lottie";
 import animationData from "../../animation/typing.json";
 
-const ENDPOINT = "http://localhost:5000";
+const DEPLOYENDPOINT = "https://devchat-8hye.onrender.com";
+const DEVENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
 const defaultOptions = {
   loop: true,
@@ -121,7 +122,7 @@ function SingleChat({ fetchChatAgain, setFetchChatAgain }) {
   };
 
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(DEPLOYENDPOINT);
     socket.emit("setup", user.finduser);
     socket.on("connected", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
