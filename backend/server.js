@@ -66,9 +66,7 @@ import { Server } from "socket.io";
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://devchat-8hye.onrender.com",
-    allowedHeaders: ["my-custom-header"],
-    credentials: true,
+    origin: "http://localhost:5173",
   },
   methods: ["GET", "POST"],
 });
