@@ -16,7 +16,7 @@ let corsOptions = {
   origin: ["http://localhost:5000", "https://devchat-8hye.onrender.com"],
 };
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -66,7 +66,7 @@ import { Server } from "socket.io";
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://devchat-8hye.onrender.com",
   },
 });
 
